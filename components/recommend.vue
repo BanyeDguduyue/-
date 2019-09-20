@@ -17,7 +17,7 @@
 <style lang="scss">
 .recommend{
   width: 100%;
-  background-color: yellow;
+  // background-color: yellow;
   height: 100%;
   padding:10upx;
   box-sizing:border-box;

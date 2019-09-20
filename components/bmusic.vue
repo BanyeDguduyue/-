@@ -6,7 +6,7 @@
           <movable-view @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" class="control-ball"
             direction="horizontal" :x="ballmove"></movable-view>
         </movable-area>
-        <progress :percent="percent" backgroundColor="green" activeColor="red" stroke-width="3" />
+        <progress :percent="percent" backgroundColor="gray" activeColor="white" stroke-width="3" />
       </view>
     </view>
     <view class="control">
@@ -111,7 +111,7 @@
           }
         })
         uni.request({
-          url: 'http://127.0.0.1:3000/song/url?id=' + nexitem.id,
+          url: 'http://39.107.80.8:5000/song/url?id=' + nexitem.id,
           method: 'GET',
           data: {},
           success: res => {
@@ -138,7 +138,7 @@
           }
         })
         uni.request({
-          url: 'http://127.0.0.1:3000/song/url?id=' + nexitem.id,
+          url: 'http://39.107.80.8:5000/song/url?id=' + nexitem.id,
           method: 'GET',
           data: {},
           success: res => {
@@ -202,7 +202,7 @@
   .m_container {
     width: 100%;
     height: 12vh;
-    background-color: #000000;
+    // background-color: #000000;
 
     .progress {
       width: 100vw;
@@ -254,7 +254,7 @@
           top: -250upx;
           width: 70upx;
           height: 250upx;
-          background-color: rgb(0, 0, 0);
+          background-color: rgba(0, 0, 0,.4);
           display: flex;
           justify-content: space-between;
           flex-direction: column;

@@ -140,10 +140,8 @@
         display: flex;
         line-height: 100upx;
         border-bottom: 1rpx solid #ccc;
-
         .song-num {
           flex: 1.1;
-          ;
           text-align: center;
         }
 

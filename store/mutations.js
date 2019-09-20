@@ -16,6 +16,7 @@ export default {
     state.nowsong = id
     // 设定src
     state.innerAudioContext.src = src
+    state.avatar = state.bgimgurl = state.sonlists.filter(item => item.id == state.nowsong)[0].picurl
     store.commit('playMusic')
   },
   // 播放音乐
@@ -97,7 +98,7 @@ export default {
     console.log(nexitem);
     // 发送请求获取url
     uni.request({
-      url: 'http://127.0.0.1:3000/song/url?id=' + nexitem.id,
+      url: 'http://39.107.80.8:5000/song/url?id=' + nexitem.id,
       method: 'GET',
       data: {},
       success: res => {

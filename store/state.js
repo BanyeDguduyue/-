@@ -22,5 +22,9 @@ export default {
   // 循环方式
   loop_type: 'list-loop',
   // 歌曲列表
-  sonlists:[]
+  sonlists:[],
+  // 初始的图片背景
+  bgimgurl: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
+  // 初始化头像
+  avatar: 'http://img4.imgtn.bdimg.com/it/u=3259600917,179456761&fm=26&gp=0.jpg'
 }

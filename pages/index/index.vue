@@ -1,5 +1,9 @@
 <template>
   <view class="uni-flex uni-column content">
+    <view class="mask"></view>
+    <view class="bg" :style="{'background-image': getimgbg }">
+    
+    </view>
     <view class="flex-item">
       <Mheader></Mheader>
     </view>
@@ -51,6 +55,13 @@
         songList: []
       }
     },
+    computed:{
+      // 获取vuex的bg图
+      getimgbg(){
+        const url = this.$store.state.bgimgurl
+        return `url(${url})`
+      }
+    },
     onLoad() {
       uni.request({
         url: 'http://127.0.0.1:3000/top/list?idx=1',
@@ -100,11 +111,35 @@
 <style>
   page {
     height: 100vh;
-    background-color: rgba(0, 0, 0, .3);
+    position: relative;
   }
-
+  .bg {
+    filter: blur(22upx);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -3;
+    transform: translateZ(0);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed ;
+    background-size: cover;
+    transition: all .8s;
+  }
+  
+  .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, .4)
+  }
   .content {
-    background-color: rgba(0, 0, 0, .3);
+
     height: 100vh;
     width: 100%;
   }
@@ -114,7 +149,7 @@
     justify-content: space-around;
     font-size: 30upx;
     height: 6vh;
-    background-color: white;
+    color: white;
   }
 
   .tab-item {

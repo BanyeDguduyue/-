@@ -26,7 +26,6 @@
 /* 文章场景相关 */
 .search {
   width: 100%;
-  background-color: blue;
   height: 100%;
   padding: 10rpx;
   -webkit-box-sizing: border-box;

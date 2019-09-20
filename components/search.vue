@@ -17,7 +17,7 @@
 <style lang="scss">
   .search {
     width: 100%;
-    background-color: blue;
+    // background-color: blue;
     height: 100%;
     padding:10upx;
     box-sizing:border-box;
