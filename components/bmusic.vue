@@ -1,16 +1,21 @@
 <template>
   <view class="m_container">
     <view class="progress">
-      <view class="progress-box">
+      <view class="progress-box" @tap="gotoTarget">
         <movable-area class="mov-area">
-          <movable-view @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" class="control-ball" direction="horizontal" :x="ballmove"></movable-view>
+          <movable-view @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" class="control-ball"
+            direction="horizontal" :x="ballmove"></movable-view>
         </movable-area>
-        <progress :percent="$store.getters.progress" stroke-width="3" />
+        <progress :percent="percent" backgroundColor="green" activeColor="red" stroke-width="3" />
       </view>
     </view>
     <view class="control">
-      <view class="loop-type">
+      <view class="loop-type" :class="curtype" @tap="openlist">
+        <view class="type-list"  v-if="isopenlist">
+          <view :class="item" v-for="item in loop_type" :key='item' @tap="choosetype(item)">
 
+          </view>
+        </view>
       </view>
       <view class="pre" @tap="premusic">
 
@@ -33,33 +38,48 @@
     props: ['songList'],
     data() {
       return {
+        // 当前的位子
         nowlocation: '',
+        // 进度条的宽度
         width: 0,
         query: null,
         // 控制滑块不要乱跑
-        ismove: false
+        ismove: false,
+        //当前球的位置
+        balllocat: null,
+        // 进度条的左边距
+        progressLeft: null,
+        // 播放的方式 如循环
+        loop_type: ['list-loop', 'single-loop', 'random'],
+        // 是否打开播放方式的选择列表
+        isopenlist: false,
+        // 用于改变下边的循环方式的中间变量间接改变样式
+        curtype: 'list-loop'
       }
     },
     computed: {
-      stoporplay(){
-        if(!this.$store.state.musicisplay){
+      // 改变播放的样式
+      stoporplay() {
+        if (!this.$store.state.musicisplay) {
           return 'play'
-        }else{
+        } else {
           return 'stop'
         }
       },
+      // 小球的移动
       ballmove() {
-        if(this.ismove){
-          return 0
-        }else{
-          return (this.$store.getters.progress * this.width * 0.01).toFixed(2)
-        }
+        return parseInt(this.$store.getters.ballprogress * this.width)
+      },
+      percent() {
+        return this.$store.getters.ballprogress * 100
       }
     },
     mounted() {
+      // 获取进度条的宽度,和距离左边的位置
       const query = uni.createSelectorQuery().in(this);
       query.select('.progress-box').boundingClientRect(data => {
         this.width = data.width
+        this.progressLeft = data.left
       }).exec();
     },
     methods: {
@@ -83,7 +103,6 @@
       // 下一首
       nextmusic() {
         const nowsong = this.$store.state.nowsong
-
         let nexitem
         this.songList.forEach((item, idx) => {
           if (item.id == nowsong) {
@@ -134,35 +153,44 @@
         });
       },
       touchstart(e) {
-        this.ismove = true
+        // 发送命令停止小球定时器
+        this.$store.commit('stopballp')
+      },
+      touchmove(e) {
+
+      },
+      touchend() {
+        // 这里进行歌曲的跳转
+        this.$store.commit('aloneballp')
         const query = uni.createSelectorQuery().in(this)
         // 获取当前距离最左边的距离
         query.select('.control-ball').boundingClientRect(data => {
-          const left = JSON.stringify(data).left
-          const nowlocation = e.touches[0].pageX
-          // 进度条距离最左边的距离
-          this.nowlocation = nowlocation - left
+          const controlballleft = data.left
+          const nowloc = data.left - this.progressLeft
+          // 获得当前的秒数
+          const nowsec = parseInt((nowloc / this.width) * this.$store.state.duration)
+          // 传递参数进行时间跳跃
+          this.$store.commit('jumpToTarget', nowsec)
         }).exec();
       },
-      touchmove(e) {
-//         // 如果没放歌就不能拖动
-//         if (!this.$store.state.innerAudioContext.src) {
-//           return
-//         }
-//         // 不能拉出进度条的范围
-//         if (e.touches[0].pageX < this.nowlocation) {
-//           this.$refs.ball.$el.style.left = 0
-// 
-//         } else if (e.touches[0].pageX > (this.width + this.nowlocation)) {
-//           this.$refs.ball.$el.style.left = this.width + 'px'
-//         } else {
-//           this.$refs.ball.$el.style.left = (e.touches[0].pageX - this.nowlocation) + 'px'
-//         }
+      gotoTarget(e) {
+        const query = uni.createSelectorQuery().in(this);
+        const left = e.touches[0].pageX
+        const target = left - this.progressLeft
+        const targetsec = parseInt((target / this.width) * this.$store.state.duration)
+        // 传递参数进行时间跳跃
+        this.$store.commit('jumpToTarget', targetsec)
       },
-      touchend() {
-        this.ismove = false
-        // console.log(this.$refs.ball.$el.style.left);
-        // parseInt(this.$refs.ball.$el.style.left) * 100 / this.width
+      openlist() {
+        if (this.isopenlist == true) {
+          this.isopenlist = false
+        } else {
+          this.isopenlist = true
+        }
+      },
+      choosetype(type) {
+        this.curtype = type
+        this.$store.commit('getlooptype',type)
       }
     }
   }
@@ -186,21 +214,20 @@
       .progress-box {
         position: relative;
         width: 90%;
-         .mov-area{
-           width: 100%;
-           height: 3px;
-           position: absolute;
-           left: 0;
-           top: 0;
-         }
-        .control-ball {
-          position: absolute;
-          width: 30upx;
+
+        .mov-area {
+          width: 100%;
           height: 30upx;
-          border-radius: 50%;
-          background-color: #FFFFFF;
+          position: absolute;
+          left: 0;
           top: -11upx;
-          left: -15upx;
+
+          .control-ball {
+            width: 30upx;
+            height: 30upx;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+          }
         }
       }
     }
@@ -212,11 +239,60 @@
       justify-content: space-around;
       height: 110upx;
 
+
+
       .loop-type {
         width: 70upx;
         height: 70upx;
-        background-image: url($liebiaoxunhuan);
         background-size: cover;
+        position: relative;
+
+
+        .type-list {
+          position: absolute;
+          left: 0;
+          top: -250upx;
+          width: 70upx;
+          height: 250upx;
+          background-color: rgb(0, 0, 0);
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          border-radius: 30upx;
+
+          .list-loop {
+            width: 70upx;
+            height: 70upx;
+            background-image: url($liebiaoxunhuan);
+            background-size: cover;
+          }
+
+          .single-loop {
+            width: 70upx;
+            height: 70upx;
+            background-image: url($danquxunhuan);
+            background-size: cover;
+          }
+
+          .random {
+            width: 70upx;
+            height: 70upx;
+            background-image: url($suiji);
+            background-size: cover;
+          }
+        }
+      }
+
+      .list-loop {
+        background-image: url($liebiaoxunhuan);
+      }
+
+      .single-loop {
+        background-image: url($danquxunhuan);
+      }
+
+      .random {
+        background-image: url($suiji);
       }
 
       .pre {

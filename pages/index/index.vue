@@ -75,6 +75,7 @@
               picurl: item.al.picUrl
             }
           })
+          this.$store.commit('getsonglist',this.songList)
         },
         fail: () => {},
         complete: () => {}
