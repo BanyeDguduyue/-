@@ -28,7 +28,6 @@
         </view>
       </view>
     </scroll-view>
-
   </view>
 </template>
 
@@ -60,7 +59,7 @@
         if (this.$store.state.nowsong !== id) {
           // 不相等就播放其他的歌
           uni.request({
-            url: 'http://127.0.0.1:3000/song/url?id=' + id,
+            url: 'http://39.107.80.8:5000/song/url?id=' + id,
             method: 'GET',
             data: {},
             success: res => {
@@ -78,7 +77,7 @@
           return
         }
         // 判断是否在暂停状态
-        if (this.$store.state.innerAudioContext.paused) {
+        if (!this.$store.state.musicisplay) {
           this.$store.commit('playMusic')
         } else {
           this.$store.commit('pauseMusic')
@@ -133,13 +132,14 @@
 
     .songs-list {
       color: hsla(0, 0%, 100%, .6);
-      height: 67vh;
+      height: 63vh;
 
       .song-item {
-        height: 6.5vh;
+        height: 6.1vh;
         display: flex;
         line-height: 100upx;
-        border-bottom: 1rpx solid #ccc;
+        border-bottom: 1rpx solid rgba(255,255,255,.1);
+        align-items: center;
         .song-num {
           flex: 1.1;
           text-align: center;

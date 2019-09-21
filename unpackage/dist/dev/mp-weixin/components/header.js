@@ -128,7 +128,10 @@ var _default =
   },
   computed: {
     getavatar: function getavatar() {
-      return this.$store.state.avatar;
+      return this.$store.state.curavatar;
+    },
+    name: function name() {
+      return this.$store.state.name;
     } },
 
   mounted: function mounted() {} };exports.default = _default;

@@ -1,17 +1,14 @@
 <template>
   <view class="m_container">
     <view class="progress">
-      <view class="progress-box" @tap="gotoTarget">
-        <movable-area class="mov-area">
-          <movable-view @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend" class="control-ball"
-            direction="horizontal" :x="ballmove"></movable-view>
-        </movable-area>
-        <progress :percent="percent" backgroundColor="gray" activeColor="white" stroke-width="3" />
+      <view class="progress-box">
+        <slider :aaa='percent' :value="balllocat" @touchstart="touchstart" @change="sliderChange" activeColor="#FFFFFF"
+          backgroundColor="#ccc" block-color="#FFFFFF" block-size="20" />
       </view>
     </view>
     <view class="control">
       <view class="loop-type" :class="curtype" @tap="openlist">
-        <view class="type-list"  v-if="isopenlist">
+        <view class="type-list" v-if="isopenlist">
           <view :class="item" v-for="item in loop_type" :key='item' @tap="choosetype(item)">
 
           </view>
@@ -26,7 +23,7 @@
       <view class="next" @tap='nextmusic'>
 
       </view>
-      <view class="comment">
+      <view class="comment" @tap="getComment">
 
       </view>
     </view>
@@ -38,17 +35,10 @@
     props: ['songList'],
     data() {
       return {
-        // 当前的位子
-        nowlocation: '',
         // 进度条的宽度
         width: 0,
-        query: null,
-        // 控制滑块不要乱跑
-        ismove: false,
         //当前球的位置
         balllocat: null,
-        // 进度条的左边距
-        progressLeft: null,
         // 播放的方式 如循环
         loop_type: ['list-loop', 'single-loop', 'random'],
         // 是否打开播放方式的选择列表
@@ -66,23 +56,38 @@
           return 'stop'
         }
       },
-      // 小球的移动
-      ballmove() {
-        return parseInt(this.$store.getters.ballprogress * this.width)
-      },
       percent() {
-        return this.$store.getters.ballprogress * 100
+        // 相当于定时器给小球的位置不断计算
+        this.balllocat = this.$store.getters.ballprogress * 100
+        return 'aaa'
       }
     },
     mounted() {
-      // 获取进度条的宽度,和距离左边的位置
-      const query = uni.createSelectorQuery().in(this);
-      query.select('.progress-box').boundingClientRect(data => {
-        this.width = data.width
-        this.progressLeft = data.left
-      }).exec();
+
     },
     methods: {
+      // 获取评论
+      getComment() {
+        if(!this.$store.state.nowsong) return
+        const songid = this.$store.state.nowsong
+        uni.navigateTo({
+          url: '../comment/comment?songid=' + songid,
+          success: res => {},
+          fail: () => {},
+          complete: () => {}
+        });
+      },
+      sliderChange(e) {
+        // 获取改变的位置
+        const value = e.detail.value
+        // 计算当前的时间
+        const nowsec = value * 0.01 * this.$store.state.duration1
+        // 打开计算小球的定时器
+        this.$store.commit('aloneballp')
+        // 跳跃到目标时间
+        this.$store.commit('jumpToTarget', nowsec)
+        this.balllocat = value
+      },
       // 处理音乐
       handleMusic() {
         // 判断是否有src属性
@@ -90,7 +95,7 @@
           uni.showModal({
             content: '请播放一个音乐',
             showCancel: false
-          });
+          })
           return
         }
         // 判断是否是播放状态
@@ -127,10 +132,10 @@
       },
       // 上一首
       premusic() {
-
+        // 获取当前歌曲的ID
         const nowsong = this.$store.state.nowsong
-
         let nexitem
+        // 筛选出上一首歌的信息
         this.songList.forEach((item, idx) => {
           if (item.id == nowsong) {
             const i = idx == 0 ? this.songList.length - 1 : idx - 1
@@ -156,31 +161,7 @@
         // 发送命令停止小球定时器
         this.$store.commit('stopballp')
       },
-      touchmove(e) {
-
-      },
-      touchend() {
-        // 这里进行歌曲的跳转
-        this.$store.commit('aloneballp')
-        const query = uni.createSelectorQuery().in(this)
-        // 获取当前距离最左边的距离
-        query.select('.control-ball').boundingClientRect(data => {
-          const controlballleft = data.left
-          const nowloc = data.left - this.progressLeft
-          // 获得当前的秒数
-          const nowsec = parseInt((nowloc / this.width) * this.$store.state.duration)
-          // 传递参数进行时间跳跃
-          this.$store.commit('jumpToTarget', nowsec)
-        }).exec();
-      },
-      gotoTarget(e) {
-        const query = uni.createSelectorQuery().in(this);
-        const left = e.touches[0].pageX
-        const target = left - this.progressLeft
-        const targetsec = parseInt((target / this.width) * this.$store.state.duration)
-        // 传递参数进行时间跳跃
-        this.$store.commit('jumpToTarget', targetsec)
-      },
+      // 打开选择播放模式的开关
       openlist() {
         if (this.isopenlist == true) {
           this.isopenlist = false
@@ -188,9 +169,10 @@
           this.isopenlist = true
         }
       },
+      // 选择哪种播放模式的type
       choosetype(type) {
         this.curtype = type
-        this.$store.commit('getlooptype',type)
+        this.$store.commit('getlooptype', type)
       }
     }
   }
@@ -202,7 +184,7 @@
   .m_container {
     width: 100%;
     height: 12vh;
-    // background-color: #000000;
+
 
     .progress {
       width: 100vw;
@@ -214,21 +196,6 @@
       .progress-box {
         position: relative;
         width: 90%;
-
-        .mov-area {
-          width: 100%;
-          height: 30upx;
-          position: absolute;
-          left: 0;
-          top: -11upx;
-
-          .control-ball {
-            width: 30upx;
-            height: 30upx;
-            border-radius: 50%;
-            background-color: #FFFFFF;
-          }
-        }
       }
     }
 
@@ -239,14 +206,11 @@
       justify-content: space-around;
       height: 110upx;
 
-
-
       .loop-type {
         width: 70upx;
         height: 70upx;
         background-size: cover;
         position: relative;
-
 
         .type-list {
           position: absolute;
@@ -254,7 +218,7 @@
           top: -250upx;
           width: 70upx;
           height: 250upx;
-          background-color: rgba(0, 0, 0,.4);
+          background-color: rgba(0, 0, 0, .4);
           display: flex;
           justify-content: space-between;
           flex-direction: column;

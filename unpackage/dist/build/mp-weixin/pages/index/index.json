@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "bmusic": "/components/bmusic",
+    "mheader": "/components/header",
+    "hot": "/components/hot",
+    "recommend": "/components/recommend",
+    "search": "/components/search",
+    "my": "/components/my"
+  }
+}

@@ -167,28 +167,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
 {
   data: function data() {
     return {
-      current: '正在',
-      songList: [] };
+      current: 'now',
+      songList: [],
+      imgurl: null,
+      tablist: [{
+        title: '正在热播',
+        type: 'now' },
+
+      {
+        title: '推荐',
+        type: 'recommend' },
+
+      {
+        title: '搜索',
+        type: 'search' },
+
+      {
+        title: '我听过的',
+        type: 'already' }] };
+
 
   },
   computed: {
-    // 获取vuex的bg图
+    // 获取vuex的bg图 用于防闪动
     getimgbg: function getimgbg() {
       var url = this.$store.state.bgimgurl;
-      return "url(".concat(url, ")");
+      return url;
+    },
+    underline: function underline() {
+
     } },
 
   onLoad: function onLoad() {var _this = this;
+    uni.showLoading({
+      title: '正在加载请稍后。。。' });
+
     uni.request({
-      url: 'http://127.0.0.1:3000/top/list?idx=1',
+      url: 'http://39.107.80.8:5000/top/list?idx=1',
       method: 'GET',
       data: {},
       success: function success(res) {
@@ -210,6 +228,7 @@ __webpack_require__.r(__webpack_exports__);
             picurl: item.al.picUrl };
 
         });
+        uni.hideLoading();
         _this.$store.commit('getsonglist', _this.songList);
       },
       fail: function fail() {},
@@ -219,6 +238,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     switchPage: function switchPage(val) {
       this.current = val;
+    },
+    // 等图片加载完毕后再进行加载背景图防止图片是一点一点加载的
+    onImageLoad: function onImageLoad(ev) {
+      var url = this.$store.state.bgimgurl;
+      this.$store.commit('changeAvatar', url);
+      this.imgurl = "url(".concat(url, ")");
     } },
 
   components: {

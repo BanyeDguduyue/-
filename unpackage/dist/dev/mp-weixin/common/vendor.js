@@ -8399,7 +8399,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "uni-app" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "uni-app", "usingComponents": { "bmusic": "/components/bmusic", "mheader": "/components/header", "hot": "/components/hot", "recommend": "/components/recommend", "search": "/components/search", "my": "/components/my" } }, "pages/comment/comment": { "usingComponents": {} } }, "globalStyle": { "navigationStyle": "custom", "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -9514,14 +9514,11 @@ var index_esm = {
   // 定时器进度条
   timer: null,
   // 进度条走的时间
-  currentTime: null,
   duration: null,
   // 控制所有的play样式
   musicisplay: false,
   // 当前的歌曲id
   nowsong: null,
-
-  kuailocation: 0,
   // 滑块的进度
   currentTime1: null,
   duration1: null,
@@ -9533,8 +9530,8 @@ var index_esm = {
   sonlists: [],
   // 初始的图片背景
   bgimgurl: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
-  // 初始化头像
-  avatar: 'http://img4.imgtn.bdimg.com/it/u=3259600917,179456761&fm=26&gp=0.jpg' };exports.default = _default;
+  curavatar: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
+  name: 'Simple' };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -9557,49 +9554,77 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
   // 播放其他的音乐
   getMusicAndPlay: function getMusicAndPlay(state, obj) {var
 
+
     src =
 
     obj.src,id = obj.id;
-    // 当前是第几首歌
+
+    // 停止播放歌曲
+    state.innerAudioContext.stop();
+    // 清空音频
+    state.innerAudioContext = null;
+    // 创建音频
+    state.innerAudioContext = uni.createInnerAudioContext();
+    // 获取歌的id
     state.nowsong = id;
     // 设定src
     state.innerAudioContext.src = src;
-    state.avatar = state.bgimgurl = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].picurl;
+    if (obj.searchpush) {
+      state.sonlists.unshift(obj.searchpush);
+    }
+    // 获取筛选出当前歌曲的背景图
+    state.bgimgurl = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].picurl;
+    // 更改歌曲名字
+    state.name = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].name;
+    // 播放音乐
     _index.default.commit('playMusic');
   },
   // 播放音乐
   playMusic: function playMusic(state) {
+    // 清空定时器
     clearInterval(state.timer);
     clearInterval(state.timer1);
-    // 更换样式
-    state.musicisplay = true;
+
     // 播放音乐
     state.innerAudioContext.play();
-    // 开启定时器计算进度条
+    state.innerAudioContext.onPlay(function () {
+      // 等到歌曲播放时
+      // 更换样式
+      state.musicisplay = true;
+    });
+    // 获取总时间
     state.timer = setInterval(function () {
-      state.currentTime = state.innerAudioContext.currentTime;
       state.duration = state.innerAudioContext.duration;
     }, 1000);
+
+    // 开启计算小球的进度条
     _index.default.commit('aloneballp');
 
-    // 自然播放完成后的一些操作如循环播放等
+    // 监听自然播放完成后的一些操作如循环播放等
     state.innerAudioContext.onEnded(function () {
-      _index.default.commit('getURLandPlay');
+      // 更改样式
       state.musicisplay = false;
+      // 播放模式
+      _index.default.commit('getURLandPlay');
     });
   },
   // 暂停音乐
   pauseMusic: function pauseMusic(state) {
-    // 停止进度条
+    // 停止进度条小球
     clearInterval(state.timer);
     clearInterval(state.timer1);
     // 暂停音乐
     state.innerAudioContext.pause();
-    // 更改样式
-    state.musicisplay = false;
+
+    state.innerAudioContext.onPause(function () {
+      // 更改样式
+      state.musicisplay = false;
+    });
   },
   //单独计算小球的进度
   aloneballp: function aloneballp(state) {
+    // 先清除再开启
+    clearInterval(state.timer1);
     state.timer1 = setInterval(function () {
       state.currentTime1 = state.innerAudioContext.currentTime;
       state.duration1 = state.innerAudioContext.duration;
@@ -9614,12 +9639,15 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
     state.innerAudioContext.seek(time);
   },
   getlooptype: function getlooptype(state, type) {
+    // 获取用户选择的播放模式
     state.loop_type = type;
   },
   getsonglist: function getsonglist(state, list) {
+    // 获取歌曲的列表
     state.sonlists = list;
   },
   getURLandPlay: function getURLandPlay(state) {
+    // 定义下一首歌
     var nexitem;
     // 列表循环
     if (state.loop_type == 'list-loop') {
@@ -9639,11 +9667,8 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
 
     // 单曲循环
     if (state.loop_type == 'single-loop') {
-
       nexitem = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0];
     }
-
-    console.log(nexitem);
     // 发送请求获取url
     uni.request({
       url: 'http://39.107.80.8:5000/song/url?id=' + nexitem.id,
@@ -9659,6 +9684,9 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
       fail: function fail() {},
       complete: function complete() {} });
 
+  },
+  changeAvatar: function changeAvatar(state, url) {
+    state.curavatar = url;
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
@@ -9691,13 +9719,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 
 {
-  // 计算进度条
-  progress: function progress(state) {
-    if (!state.currentTime) {
-      return 0;
-    }
-    return parseFloat(state.currentTime * 100 / state.duration);
-  },
+  //计算小球的进度
   ballprogress: function ballprogress(state) {
     if (!state.currentTime1) {
       return 0;

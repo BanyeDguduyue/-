@@ -48,19 +48,6 @@
       position: relative;
       width: 90%;
 }
-.m_container .progress .progress-box .mov-area {
-        width: 100%;
-        height: 30rpx;
-        position: absolute;
-        left: 0;
-        top: -11rpx;
-}
-.m_container .progress .progress-box .mov-area .control-ball {
-          width: 30rpx;
-          height: 30rpx;
-          border-radius: 50%;
-          background-color: #FFFFFF;
-}
 .m_container .control {
     display: -webkit-box;
     display: -webkit-flex;

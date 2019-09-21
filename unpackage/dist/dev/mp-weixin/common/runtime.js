@@ -104,11 +104,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/bmusic":1,"components/header":1,"components/hot":1,"components/my":1,"components/recommend":1,"components/search":1};
+/******/ 		var cssChunks = {"components/bmusic":1,"components/header":1,"components/hot":1,"components/my":1,"components/recommend":1,"components/search":1,"components/uni-ui/uni-search-bar/uni-search-bar":1,"components/uni-ui/uni-icons/uni-icons":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/bmusic":"components/bmusic","components/header":"components/header","components/hot":"components/hot","components/my":"components/my","components/recommend":"components/recommend","components/search":"components/search"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/bmusic":"components/bmusic","components/header":"components/header","components/hot":"components/hot","components/my":"components/my","components/recommend":"components/recommend","components/search":"components/search","components/uni-ui/uni-search-bar/uni-search-bar":"components/uni-ui/uni-search-bar/uni-search-bar","components/uni-ui/uni-icons/uni-icons":"components/uni-ui/uni-icons/uni-icons"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

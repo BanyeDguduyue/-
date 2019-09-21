@@ -6,7 +6,7 @@
       </view>
     </view>
     <view class="title">
-      Easy
+      {{name}}
     </view>
   </view>
 </template>
@@ -21,7 +21,10 @@
     },
     computed: {
       getavatar() {
-        return this.$store.state.avatar
+        return this.$store.state.curavatar
+      },
+      name(){
+        return this.$store.state.name
       }
     },
     mounted() {}
@@ -39,7 +42,6 @@
     padding: 8upx 0;
     box-sizing: border-box;
     align-items: center;
-
     .left {
       flex: 1;
 
@@ -61,6 +63,9 @@
 
     .title {
       flex: 2;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 

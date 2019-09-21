@@ -1,13 +1,7 @@
 import state from './state'
 
 export default {
-  // 计算进度条
-  progress(state) {
-    if (!state.currentTime) {
-      return 0
-    }
-    return parseFloat(state.currentTime * 100 / state.duration)
-  },
+  //计算小球的进度
   ballprogress(state) {
     if (!state.currentTime1) {
       return 0

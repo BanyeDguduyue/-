@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/comment/comment"
   ],
   "window": {
+    "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F8F8F8",
@@ -15,6 +17,6 @@
     "autoclose": false
   },
   "appname": "我的音乐",
-  "compilerVersion": "2.2.2",
+  "compilerVersion": "2.3.0",
   "usingComponents": {}
 }

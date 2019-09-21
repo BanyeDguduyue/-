@@ -154,7 +154,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   props: ['hotsong'],
@@ -183,7 +182,7 @@ var _default =
       if (this.$store.state.nowsong !== id) {
         // 不相等就播放其他的歌
         uni.request({
-          url: 'http://127.0.0.1:3000/song/url?id=' + id,
+          url: 'http://39.107.80.8:5000/song/url?id=' + id,
           method: 'GET',
           data: {},
           success: function success(res) {
@@ -201,7 +200,7 @@ var _default =
         return;
       }
       // 判断是否在暂停状态
-      if (this.$store.state.innerAudioContext.paused) {
+      if (!this.$store.state.musicisplay) {
         this.$store.commit('playMusic');
       } else {
         this.$store.commit('pauseMusic');

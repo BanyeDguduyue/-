@@ -137,25 +137,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var _default =
 {
   props: ['songList'],
   data: function data() {
     return {
-      // 当前的位子
-      nowlocation: '',
       // 进度条的宽度
       width: 0,
-      query: null,
-      // 控制滑块不要乱跑
-      ismove: false,
       //当前球的位置
       balllocat: null,
-      // 进度条的左边距
-      progressLeft: null,
       // 播放的方式 如循环
       loop_type: ['list-loop', 'single-loop', 'random'],
       // 是否打开播放方式的选择列表
@@ -173,23 +163,38 @@ var _default =
         return 'stop';
       }
     },
-    // 小球的移动
-    ballmove: function ballmove() {
-      return parseInt(this.$store.getters.ballprogress * this.width);
-    },
     percent: function percent() {
-      return this.$store.getters.ballprogress * 100;
+      // 相当于定时器给小球的位置不断计算
+      this.balllocat = this.$store.getters.ballprogress * 100;
+      return 'aaa';
     } },
 
-  mounted: function mounted() {var _this = this;
-    // 获取进度条的宽度,和距离左边的位置
-    var query = uni.createSelectorQuery().in(this);
-    query.select('.progress-box').boundingClientRect(function (data) {
-      _this.width = data.width;
-      _this.progressLeft = data.left;
-    }).exec();
+  mounted: function mounted() {
+
   },
   methods: {
+    // 获取评论
+    getComment: function getComment() {
+      if (!this.$store.state.nowsong) return;
+      var songid = this.$store.state.nowsong;
+      uni.navigateTo({
+        url: '../comment/comment?songid=' + songid,
+        success: function success(res) {},
+        fail: function fail() {},
+        complete: function complete() {} });
+
+    },
+    sliderChange: function sliderChange(e) {
+      // 获取改变的位置
+      var value = e.detail.value;
+      // 计算当前的时间
+      var nowsec = value * 0.01 * this.$store.state.duration1;
+      // 打开计算小球的定时器
+      this.$store.commit('aloneballp');
+      // 跳跃到目标时间
+      this.$store.commit('jumpToTarget', nowsec);
+      this.balllocat = value;
+    },
     // 处理音乐
     handleMusic: function handleMusic() {
       // 判断是否有src属性
@@ -208,12 +213,39 @@ var _default =
       }
     },
     // 下一首
-    nextmusic: function nextmusic() {var _this2 = this;
+    nextmusic: function nextmusic() {var _this = this;
       var nowsong = this.$store.state.nowsong;
       var nexitem;
       this.songList.forEach(function (item, idx) {
         if (item.id == nowsong) {
-          var i = idx + 1 == _this2.songList.length ? 0 : idx + 1;
+          var i = idx + 1 == _this.songList.length ? 0 : idx + 1;
+          nexitem = _this.songList[i];
+        }
+      });
+      uni.request({
+        url: 'http://39.107.80.8:5000/song/url?id=' + nexitem.id,
+        method: 'GET',
+        data: {},
+        success: function success(res) {
+          var url = res.data.data[0].url;
+          _this.$store.commit('getMusicAndPlay', {
+            src: url,
+            id: nexitem.id });
+
+        },
+        fail: function fail() {},
+        complete: function complete() {} });
+
+    },
+    // 上一首
+    premusic: function premusic() {var _this2 = this;
+      // 获取当前歌曲的ID
+      var nowsong = this.$store.state.nowsong;
+      var nexitem;
+      // 筛选出上一首歌的信息
+      this.songList.forEach(function (item, idx) {
+        if (item.id == nowsong) {
+          var i = idx == 0 ? _this2.songList.length - 1 : idx - 1;
           nexitem = _this2.songList[i];
         }
       });
@@ -232,62 +264,11 @@ var _default =
         complete: function complete() {} });
 
     },
-    // 上一首
-    premusic: function premusic() {var _this3 = this;
-
-      var nowsong = this.$store.state.nowsong;
-
-      var nexitem;
-      this.songList.forEach(function (item, idx) {
-        if (item.id == nowsong) {
-          var i = idx == 0 ? _this3.songList.length - 1 : idx - 1;
-          nexitem = _this3.songList[i];
-        }
-      });
-      uni.request({
-        url: 'http://39.107.80.8:5000/song/url?id=' + nexitem.id,
-        method: 'GET',
-        data: {},
-        success: function success(res) {
-          var url = res.data.data[0].url;
-          _this3.$store.commit('getMusicAndPlay', {
-            src: url,
-            id: nexitem.id });
-
-        },
-        fail: function fail() {},
-        complete: function complete() {} });
-
-    },
     touchstart: function touchstart(e) {
       // 发送命令停止小球定时器
       this.$store.commit('stopballp');
     },
-    touchmove: function touchmove(e) {
-
-    },
-    touchend: function touchend() {var _this4 = this;
-      // 这里进行歌曲的跳转
-      this.$store.commit('aloneballp');
-      var query = uni.createSelectorQuery().in(this);
-      // 获取当前距离最左边的距离
-      query.select('.control-ball').boundingClientRect(function (data) {
-        var controlballleft = data.left;
-        var nowloc = data.left - _this4.progressLeft;
-        // 获得当前的秒数
-        var nowsec = parseInt(nowloc / _this4.width * _this4.$store.state.duration);
-        // 传递参数进行时间跳跃
-        _this4.$store.commit('jumpToTarget', nowsec);
-      }).exec();
-    },
-    gotoTarget: function gotoTarget(e) {
-      var query = uni.createSelectorQuery().in(this);
-      var left = e.touches[0].pageX;
-      var target = left - this.progressLeft;
-      var targetsec = parseInt(target / this.width * this.$store.state.duration);
-      // 传递参数进行时间跳跃
-      this.$store.commit('jumpToTarget', targetsec);
-    },
+    // 打开选择播放模式的开关
     openlist: function openlist() {
       if (this.isopenlist == true) {
         this.isopenlist = false;
@@ -295,6 +276,7 @@ var _default =
         this.isopenlist = true;
       }
     },
+    // 选择哪种播放模式的type
     choosetype: function choosetype(type) {
       this.curtype = type;
       this.$store.commit('getlooptype', type);

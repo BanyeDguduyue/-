@@ -73,6 +73,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.ssongList, function(item, idx) {
+    var m0 = _vm.isplay(item.id)
+    return {
+      $orig: _vm.__get_orig(item),
+      m0: m0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -105,19 +121,124 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var SearchBar = function SearchBar() {return __webpack_require__.e(/*! import() | components/uni-ui/uni-search-bar/uni-search-bar */ "components/uni-ui/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/components/uni-ui/uni-search-bar/uni-search-bar */ 71));};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
-    return {};
+    return {
+      ssongList: [] };
 
+  },
+  computed: {
+    // 是否播放状态切换
+    isplay: function isplay() {
+      return function (id) {
+        return id == this.$store.state.nowsong && this.$store.state.musicisplay;
+      };
+    } },
 
-  } };exports.default = _default;
+  components: {
+    SearchBar: SearchBar },
+
+  methods: {
+    // 获取关键词然后搜索出列表
+    getkeyword: function getkeyword(keywords) {var _this = this;
+      keywords = keywords.value;
+      uni.showLoading({
+        title: '正在加载请稍后。。。' });
+
+      uni.request({
+        url: 'http://39.107.80.8:5000/search?keywords=' + keywords,
+        method: 'GET',
+        data: {},
+        success: function success(res) {
+          var data = res.data.result.songs;
+          _this.ssongList = data.map(function (item, idx) {
+            var sin = '';
+            item.artists.forEach(function (itm, idx) {
+              if (idx == 0) {
+                sin = itm.name;
+              } else {
+                sin = sin + '/' + itm.name;
+              }
+            });
+            return {
+              name: item.name,
+              singer: item.artists.length == 1 ? item.artists[0].name : sin,
+              id: item.id,
+              picurl: item.artists.length == 1 ? item.artists.img1v1Url : item.artists[0].img1v1Url };
+
+          });
+          uni.hideLoading();
+        },
+        fail: function fail() {},
+        complete: function complete() {} });
+
+    },
+    playsong: function playsong(id) {var _this2 = this;
+      if (this.$store.state.nowsong !== id) {
+        uni.request({
+          url: 'http://39.107.80.8:5000/song/url?id=' + id,
+          method: 'GET',
+          data: {},
+          success: function success(res) {
+            var url = res.data.data[0].url;
+            var thisSong = _this2.ssongList.filter(function (item) {return item.id == id;})[0];
+            _this2.$store.commit('getMusicAndPlay', {
+              src: url,
+              id: id,
+              searchpush: thisSong });
+
+          },
+          fail: function fail() {},
+          complete: function complete() {} });
+
+        // 直接返回不执行后面
+        return;
+      }
+
+      // 判断是否在暂停状态
+      if (!this.$store.state.musicisplay) {
+        this.$store.commit('playMusic');
+      } else {
+        this.$store.commit('pauseMusic');
+      }
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

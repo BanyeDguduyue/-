@@ -17,10 +17,19 @@ page {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed ;
-  background-size: cover;
+  background-size:150% 150%;
   -webkit-transition: all .8s;
   -o-transition: all .8s;
   transition: all .8s;
+}
+.currimg{
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+}
+.active{
+  border-bottom: 7rpx solid #FFFFFF;
 }
 .mask {
   position: absolute;
@@ -32,9 +41,11 @@ page {
   background-color: rgba(0, 0, 0, .4)
 }
 .content {
-
   height: 100vh;
   width: 100%;
+  padding-top: 4vh;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .tab {
   display: -webkit-box;
@@ -54,14 +65,14 @@ page {
   color: white;
 }
 .tab-item {
-  line-height: 6vh;
+  line-height: 6vh
 }
 .bottom {
   width: 100%;
 }
 .page-swich {
   width: 100%;
-  height: 74vh;
+  height: 70vh;
   padding:0 10rpx;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
