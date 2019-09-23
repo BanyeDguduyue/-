@@ -1,1 +1,1 @@
-<view class="my">123</view>
+<view class="my">123<alreadylist vue-id="1" sendsonglist="{{sendsonglist}}" bind:__l="__l"></alreadylist></view>

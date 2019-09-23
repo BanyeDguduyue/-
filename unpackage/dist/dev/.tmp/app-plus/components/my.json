@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "alreadylist": "/components/songlist"
+  },
   "component": true
 }

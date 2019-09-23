@@ -23,5 +23,6 @@ export default {
   // 初始的图片背景
   bgimgurl: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
   curavatar: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
-  name: 'Simple'
+  name: 'Simple',
+  mysonglist:[]
 }

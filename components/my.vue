@@ -1,23 +1,30 @@
 <template>
 	<view class="my">
-		123
+		<alreadylist :sendsonglist='mysonglist'></alreadylist>
 	</view>
 </template>
 
 <script>
+  import alreadylist from '@/components/mylist.vue'
 	export default {
 		data() {
 			return {
-				
 			};
-		}
+		},
+    computed:{
+      mysonglist(){
+        return this.$store.state.mysonglist
+      }
+    },
+    components:{
+      alreadylist
+    }
 	}
 </script>
 
 <style lang="scss">
 .my{
   width: 100%;
-  // background-color: green;
   height: 100%;
   padding:10upx;
   box-sizing:border-box;

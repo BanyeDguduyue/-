@@ -13,26 +13,42 @@ export default {
       src,
       id
     } = obj
-
-    // 停止播放歌曲
-    state.innerAudioContext.stop()
-    // 清空音频
-    state.innerAudioContext = null
-    // 创建音频
-    state.innerAudioContext = uni.createInnerAudioContext()
-    // 获取歌的id
-    state.nowsong = id
-    // 设定src
-    state.innerAudioContext.src = src
-    if(obj.searchpush){
-      state.sonlists.unshift(obj.searchpush)
+    if(src){
+      state.mysonglist.unshift(obj.searchpush)
+      // 停止播放歌曲
+      state.innerAudioContext.stop()
+      // 清空音频
+      state.innerAudioContext = null
+      // 创建音频
+      state.innerAudioContext = uni.createInnerAudioContext()
+      // 获取歌的id
+      state.nowsong = id
+      // 设定src
+      state.innerAudioContext.src = src
+       
+      // 判断歌单是否存在当前的歌
+      if(!state.sonlists.find(item=> item.id ==obj.searchpush.id )){
+        if(obj.searchpush){
+          state.sonlists.unshift(obj.searchpush)
+        }
+      }
+      
+      // 获取筛选出当前歌曲的背景图
+      state.bgimgurl = state.sonlists.filter(item => item.id == state.nowsong)[0].picurl
+      // 更改歌曲名字
+      state.name = state.sonlists.filter(item => item.id == state.nowsong)[0].name
+      // 播放音乐
+      store.commit('playMusic')
     }
-    // 获取筛选出当前歌曲的背景图
-    state.bgimgurl = state.sonlists.filter(item => item.id == state.nowsong)[0].picurl
-    // 更改歌曲名字
-    state.name = state.sonlists.filter(item => item.id == state.nowsong)[0].name
-    // 播放音乐
-    store.commit('playMusic')
+    
+    // 如果没有音乐链接则提示
+    if(!src){
+      uni.showToast({
+          title: '音频链接扯拐了,w(ﾟДﾟ)w',
+          duration: 2000,
+          icon:'none'
+      });
+    }
   },
   // 播放音乐
   playMusic(state) {
@@ -42,10 +58,19 @@ export default {
 
     // 播放音乐
     state.innerAudioContext.play();
+    
     state.innerAudioContext.onPlay(() => {
       // 等到歌曲播放时
       // 更换样式
       state.musicisplay = true
+    })
+    
+    state.innerAudioContext.onError(()=>{
+      uni.showToast({
+          title: '播放扯拐了，w(ﾟДﾟ)w',
+          duration: 2000,
+          icon:'none'
+      });
     })
     // 获取总时间
     state.timer = setInterval(() => {

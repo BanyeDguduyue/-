@@ -8,8 +8,7 @@
         歌手
       </view>
     </view>
-    <scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y songs-list" @scrolltoupper="upper"
-      @scrolltolower="lower" @scroll="scroll">
+    <scroll-view  scroll-y="true" class="scroll-Y songs-list">
       <view class="song-item" v-for="(item,idx) in hotsong" :key='idx'>
         <view class="song-num">
           {{idx+1}}
@@ -63,12 +62,14 @@
             method: 'GET',
             data: {},
             success: res => {
+              // 获取url
               const url = res.data.data[0].url
-
+              const thisSong = this.hotsong.filter(item => item.id == id)[0]
               this.$store.commit('getMusicAndPlay', {
                 src: url,
-                id: id
-              })
+                id: id,
+                searchpush: thisSong
+              }) 
             },
             fail: () => {},
             complete: () => {}
@@ -82,26 +83,6 @@
         } else {
           this.$store.commit('pauseMusic')
         }
-      },
-      upper: function(e) {
-
-      },
-      lower: function(e) {
-
-      },
-      scroll: function(e) {
-
-        this.old.scrollTop = e.detail.scrollTop
-      },
-      goTop: function(e) {
-        this.scrollTop = this.old.scrollTop
-        this.$nextTick(function() {
-          this.scrollTop = 0
-        });
-        uni.showToast({
-          icon: "none",
-          title: "纵向滚动 scrollTop 值已被修改为 0"
-        })
       }
     }
   }

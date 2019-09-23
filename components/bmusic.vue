@@ -2,14 +2,14 @@
   <view class="m_container">
     <view class="progress">
       <view class="progress-box">
-        <slider :aaa='percent' :value="balllocat" @touchstart="touchstart" @change="sliderChange" activeColor="#FFFFFF"
+        <slider :disabled='silderdisabled' :aaa='percent' :value="balllocat" @touchstart="touchstart" @change="sliderChange" activeColor="#FFFFFF"
           backgroundColor="#ccc" block-color="#FFFFFF" block-size="20" />
       </view>
     </view>
     <view class="control">
       <view class="loop-type" :class="curtype" @tap="openlist">
         <view class="type-list" v-if="isopenlist">
-          <view :class="item" v-for="item in loop_type" :key='item' @tap="choosetype(item)">
+          <view  v-for="(item,idx) in loop_type" :class="item.type" :key='idx' @tap="choosetype(item.type,item.name)">
 
           </view>
         </view>
@@ -40,11 +40,21 @@
         //当前球的位置
         balllocat: null,
         // 播放的方式 如循环
-        loop_type: ['list-loop', 'single-loop', 'random'],
+        loop_type:[{
+          name:'列表循环',
+          type: 'list-loop'
+        },{
+          name:'单曲循环',
+          type: 'single-loop'
+        },{
+          name:'随机播放',
+          type: 'random'
+        }],
         // 是否打开播放方式的选择列表
         isopenlist: false,
         // 用于改变下边的循环方式的中间变量间接改变样式
-        curtype: 'list-loop'
+        curtype: 'list-loop',
+        silderdisabled: true
       }
     },
     computed: {
@@ -59,8 +69,11 @@
       percent() {
         // 相当于定时器给小球的位置不断计算
         this.balllocat = this.$store.getters.ballprogress * 100
+        if(this.balllocat > 0){
+          this.silderdisabled = false
+        }
         return 'aaa'
-      }
+      },
     },
     mounted() {
 
@@ -170,9 +183,14 @@
         }
       },
       // 选择哪种播放模式的type
-      choosetype(type) {
+      choosetype(type,name) {
         this.curtype = type
         this.$store.commit('getlooptype', type)
+        uni.showToast({
+            title: `已切换至${name}`,
+            duration: 2000,
+            icon:'none'
+        });
       }
     }
   }

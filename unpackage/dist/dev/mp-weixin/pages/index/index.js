@@ -122,8 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Bmusic = function Bmusic() {return __webpack_require__.e(/*! import() | components/bmusic */ "components/bmusic").then(__webpack_require__.bind(null, /*! ../../components/bmusic.vue */ 29));};var Mheader = function Mheader() {return __webpack_require__.e(/*! import() | components/header */ "components/header").then(__webpack_require__.bind(null, /*! ../../components/header.vue */ 36));};var Hot = function Hot() {return __webpack_require__.e(/*! import() | components/hot */ "components/hot").then(__webpack_require__.bind(null, /*! ../../components/hot.vue */ 43));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/recommend */ "components/recommend").then(__webpack_require__.bind(null, /*! ../../components/recommend.vue */ 50));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! ../../components/search.vue */ 57));};var My = function My() {return __webpack_require__.e(/*! import() | components/my */ "components/my").then(__webpack_require__.bind(null, /*! ../../components/my.vue */ 64));};var _default =
-
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var Bmusic = function Bmusic() {return __webpack_require__.e(/*! import() | components/bmusic */ "components/bmusic").then(__webpack_require__.bind(null, /*! ../../components/bmusic.vue */ 37));};var Mheader = function Mheader() {return __webpack_require__.e(/*! import() | components/header */ "components/header").then(__webpack_require__.bind(null, /*! ../../components/header.vue */ 44));};var Hot = function Hot() {return __webpack_require__.e(/*! import() | components/hot */ "components/hot").then(__webpack_require__.bind(null, /*! ../../components/hot.vue */ 51));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/recommend */ "components/recommend").then(__webpack_require__.bind(null, /*! ../../components/recommend.vue */ 58));};var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! ../../components/search.vue */ 65));};var My = function My() {return __webpack_require__.e(/*! import() | components/my */ "components/my").then(__webpack_require__.bind(null, /*! ../../components/my.vue */ 72));};var _default =
 
 
 
@@ -190,15 +189,13 @@ __webpack_require__.r(__webpack_exports__);
         type: 'already' }] };
 
 
+
   },
   computed: {
     // 获取vuex的bg图 用于防闪动
     getimgbg: function getimgbg() {
       var url = this.$store.state.bgimgurl;
       return url;
-    },
-    underline: function underline() {
-
     } },
 
   onLoad: function onLoad() {var _this = this;
@@ -242,7 +239,9 @@ __webpack_require__.r(__webpack_exports__);
     // 等图片加载完毕后再进行加载背景图防止图片是一点一点加载的
     onImageLoad: function onImageLoad(ev) {
       var url = this.$store.state.bgimgurl;
+
       this.$store.commit('changeAvatar', url);
+
       this.imgurl = "url(".concat(url, ")");
     } },
 
