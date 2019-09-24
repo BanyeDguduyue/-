@@ -1,1 +1,1 @@
-<view class="header">简单音乐播放器</view>
+<view class="header"><view class="left"><view class="avatar-container"><image class="avatar" src="{{getavatar}}"></image></view></view><view class="title">{{''+name+''}}</view></view>

@@ -27,9 +27,79 @@
 .header {
   color: white;
   text-align: center;
-  background: black;
   height: 8vh;
   font-size: 40rpx;
   line-height: 8vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8rpx 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.header .left {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+.header .left .avatar-container {
+      margin: 0 auto;
+      width: 8vh;
+      height: 8vh;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 8rpx solid #8a977b;
+      -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+      -webkit-animation: headRotate 6s linear infinite;
+              animation: headRotate 6s linear infinite;
+}
+.header .left .avatar-container .avatar {
+        width: 100%;
+        height: 100%;
+}
+.header .title {
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    overflow: hidden;
+}
+@-webkit-keyframes headRotate {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes headRotate {
+0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
 }
 

@@ -70,6 +70,7 @@
         // 相当于定时器给小球的位置不断计算
         this.balllocat = this.$store.getters.ballprogress * 100
         if(this.balllocat > 0){
+          // console.log(this.$store.getters.ballprogress * 100);
           this.silderdisabled = false
         }
         return 'aaa'
@@ -136,7 +137,8 @@
             const url = res.data.data[0].url
             this.$store.commit('getMusicAndPlay', {
               src: url,
-              id: nexitem.id
+              id: nexitem.id,
+              searchpush: nexitem
             })
           },
           fail: () => {},
@@ -163,7 +165,8 @@
             const url = res.data.data[0].url
             this.$store.commit('getMusicAndPlay', {
               src: url,
-              id: nexitem.id
+              id: nexitem.id,
+              searchpush: nexitem
             })
           },
           fail: () => {},

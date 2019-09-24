@@ -14,7 +14,7 @@ export default {
       id
     } = obj
     if(src){
-      state.mysonglist.unshift(obj.searchpush)
+      
       // 停止播放歌曲
       state.innerAudioContext.stop()
       // 清空音频
@@ -27,11 +27,13 @@ export default {
       state.innerAudioContext.src = src
        
       // 判断歌单是否存在当前的歌
-      if(!state.sonlists.find(item=> item.id ==obj.searchpush.id )){
-        if(obj.searchpush){
-          state.sonlists.unshift(obj.searchpush)
-        }
+      if(!state.sonlists.find(item=> item.id == obj.searchpush.id )){
+        state.sonlists.unshift(obj.searchpush)
       }
+      if(!state.mysonglist.find((item)=>item.id == obj.searchpush.id)){
+        state.mysonglist.unshift(obj.searchpush)
+      }
+      
       
       // 获取筛选出当前歌曲的背景图
       state.bgimgurl = state.sonlists.filter(item => item.id == state.nowsong)[0].picurl
@@ -62,10 +64,12 @@ export default {
     state.innerAudioContext.onPlay(() => {
       // 等到歌曲播放时
       // 更换样式
+      
       state.musicisplay = true
     })
     
     state.innerAudioContext.onError(()=>{
+      console.log(1);
       uni.showToast({
           title: '播放扯拐了，w(ﾟДﾟ)w',
           duration: 2000,
@@ -158,7 +162,8 @@ export default {
         const url = res.data.data[0].url
         store.commit('getMusicAndPlay', {
           src: url,
-          id: nexitem.id
+          id: nexitem.id,
+          searchpush:nexitem
         })
       },
       fail: () => {},

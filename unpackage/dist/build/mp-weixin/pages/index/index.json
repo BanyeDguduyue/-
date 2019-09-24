@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "uni-app",
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "半夜的孤独月",
   "usingComponents": {
     "bmusic": "/components/bmusic",
     "mheader": "/components/header",

@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/comment/comment"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -14,7 +15,7 @@
     "alwaysShowBeforeRender": true,
     "autoclose": false
   },
-  "appname": "我的音乐",
-  "compilerVersion": "2.2.2",
+  "appname": "easyMusic",
+  "compilerVersion": "2.3.2",
   "usingComponents": {}
 }

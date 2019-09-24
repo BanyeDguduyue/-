@@ -9,7 +9,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.7.0",
 	"appid": "wx3cb402c2393da013",
-	"projectname": "我的音乐",
+	"projectname": "easyMusic",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

@@ -39,7 +39,7 @@
         old: {
           scrollTop: 0
         },
-        url: ''
+        url: '',
       };
     },
     mounted() {

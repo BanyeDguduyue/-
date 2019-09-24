@@ -5,7 +5,7 @@
     "iPad"
   ],
   "id": "__UNI__70D9D61",
-  "name": "我的音乐",
+  "name": "easyMusic",
   "version": {
     "name": "1.0.0",
     "code": "100"
@@ -83,7 +83,7 @@
     },
     "allowsInlineMediaPlayback": true,
     "uni-app": {
-      "compilerVersion": "2.2.2",
+      "compilerVersion": "2.3.2",
       "control": "v8",
       "nvueCompiler": "weex",
       "renderer": "auto"
