@@ -1,0 +1,142 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  height: 100vh;
+  position: relative;
+}
+.music-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.music-info .back {
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTY5OTg1NDEwNDg1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjE3OTIiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTczNiAxMDI0bC01MTItNTEyIDUwNS42LTUxMiA3MC40IDcwLjRMMzU4LjQgNTEybDQ0MS42IDQ0OEw3MzYgMTAyNHoiIHAtaWQ9IjE3OTMiIGZpbGw9IiNmZmZmZmYiPjwvcGF0aD48L3N2Zz4=");
+    position: absolute;
+    top: 34px;
+    left: 40rpx;
+    width: 60rpx;
+    height: 60rpx;
+    background-size: cover;
+}
+.music-info .title {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    color: #FFFFFF;
+}
+.music-info .author {
+    font-size: 22rpx;
+    color: #FFFFFF;
+    margin-bottom: 5vh;
+}
+.music-info .song-img {
+    width: 75vw;
+    height: 57vw;
+    border-radius: 20rpx;
+    overflow: hidden;
+    margin-bottom: 5vh;
+}
+.music-info .song-img .img-content {
+      width: 100%;
+      height: 100%;
+      -webkit-transition: all .5s;
+      -o-transition: all .5s;
+      transition: all .5s;
+}
+.music-info .lyric-scroll {
+    width: 100vw;
+    height: 20vh;
+    position: relative;
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(15%, rgba(255, 255, 255, 0.6)), color-stop(25%, white), color-stop(75%, white), color-stop(85%, rgba(255, 255, 255, 0.6)), to(rgba(255, 255, 255, 0)));
+    -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.6) 15%, white 25%, white 75%, rgba(255, 255, 255, 0.6) 85%, rgba(255, 255, 255, 0) 100%);
+            mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255, 255, 255, 0)), color-stop(15%, rgba(255, 255, 255, 0.6)), color-stop(25%, white), color-stop(75%, white), color-stop(85%, rgba(255, 255, 255, 0.6)), to(rgba(255, 255, 255, 0)));
+            mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.6) 15%, white 25%, white 75%, rgba(255, 255, 255, 0.6) 85%, rgba(255, 255, 255, 0) 100%);
+}
+.music-info .lyric-scroll .lyric-container .lyric {
+      font-size: 30rpx;
+      color: rgba(225, 225, 225, 0.8);
+      line-height: 40px;
+      text-align: center;
+}
+.music-info .lyric-scroll .lyric-container .active {
+      color: #4CD964;
+      font-size: 40rpx;
+      font-weight: 700;
+      -webkit-transition: all 0.5s;
+      -o-transition: all 0.5s;
+      transition: all 0.5s;
+}
+.music-info .lyric-scroll2 {
+    height: 62vh;
+    -webkit-transition: height 1s;
+    -o-transition: height 1s;
+    transition: height 1s;
+}
+.music-info .music-control {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.music-info .bg {
+    -webkit-filter: blur(65px);
+            filter: blur(65px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: .6;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 150% 150%;
+    -webkit-transition: all .8s;
+    -o-transition: all .8s;
+    transition: all .8s;
+}
+.music-info .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+

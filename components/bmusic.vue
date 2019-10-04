@@ -1,16 +1,21 @@
 <template>
   <view class="m_container">
     <view class="progress">
+      <view class="ptime">
+        {{getcurrent}}
+      </view>
       <view class="progress-box">
         <slider :disabled='silderdisabled' :aaa='percent' :value="balllocat" @touchstart="touchstart" @change="sliderChange" activeColor="#FFFFFF"
           backgroundColor="#ccc" block-color="#FFFFFF" block-size="20" />
+      </view>
+      <view class="ptime">
+        {{getduration}}
       </view>
     </view>
     <view class="control">
       <view class="loop-type" :class="curtype" @tap="openlist">
         <view class="type-list" v-if="isopenlist">
           <view  v-for="(item,idx) in loop_type" :class="item.type" :key='idx' @tap="choosetype(item.type,item.name)">
-
           </view>
         </view>
       </view>
@@ -69,12 +74,36 @@
       percent() {
         // 相当于定时器给小球的位置不断计算
         this.balllocat = this.$store.getters.ballprogress * 100
-        if(this.balllocat > 0){
+        if(this.$store.getters.ballprogress * 100 > 0){
           // console.log(this.$store.getters.ballprogress * 100);
           this.silderdisabled = false
         }
         return 'aaa'
       },
+      getduration(){
+        const duration = this.$store.state.duration
+        let min = parseInt(duration/60)
+        if(min<10){
+          min = '0' + min
+        }
+        let sec = parseInt(duration - min * 60 )
+        if(sec< 10){
+          sec = '0' + sec
+        }
+        return `${min}:${sec}`
+      },
+      getcurrent(){
+        const current = this.$store.state.currentTime1
+        let min = parseInt(current/60)
+        if(min<10){
+          min = '0' + min
+        }
+        let sec = parseInt(current - min * 60 )
+        if(sec< 10){
+          sec = '0' + sec
+        }
+        return `${min}:${sec}`
+      }
     },
     mounted() {
 
@@ -123,10 +152,10 @@
       nextmusic() {
         const nowsong = this.$store.state.nowsong
         let nexitem
-        this.songList.forEach((item, idx) => {
+        this.$store.state.sonlists.forEach((item, idx) => {
           if (item.id == nowsong) {
-            const i = idx + 1 == this.songList.length ? 0 : idx + 1
-            nexitem = this.songList[i]
+            const i = idx + 1 == this.$store.state.sonlists.length ? 0 : idx + 1
+            nexitem = this.$store.state.sonlists[i]
           }
         })
         uni.request({
@@ -151,10 +180,10 @@
         const nowsong = this.$store.state.nowsong
         let nexitem
         // 筛选出上一首歌的信息
-        this.songList.forEach((item, idx) => {
+        this.$store.state.sonlists.forEach((item, idx) => {
           if (item.id == nowsong) {
-            const i = idx == 0 ? this.songList.length - 1 : idx - 1
-            nexitem = this.songList[i]
+            const i = idx == 0 ? this.$store.state.sonlists.length - 1 : idx - 1
+            nexitem = this.$store.state.sonlists[i]
           }
         })
         uni.request({
@@ -205,15 +234,18 @@
   .m_container {
     width: 100%;
     height: 12vh;
-
-
     .progress {
       width: 100vw;
       height: 40upx;
       display: flex;
       align-items: center;
       justify-content: center;
-
+      padding: 0 8px;
+      box-sizing: border-box;
+      .ptime{
+        color: #FFFFFF;
+        font-size: 20upx;
+      }
       .progress-box {
         position: relative;
         width: 90%;
@@ -288,15 +320,15 @@
       }
 
       .stop {
-        width: 100upx;
-        height: 100upx;
+        width: 80upx;
+        height: 80upx;
         background-image: url($stop);
         background-size: cover;
       }
 
       .play {
-        width: 100upx;
-        height: 100upx;
+        width: 80upx;
+        height: 80upx;
         background-image: url($play);
         background-size: cover;
       }

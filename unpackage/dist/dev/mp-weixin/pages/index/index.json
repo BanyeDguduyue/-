@@ -2,7 +2,7 @@
   "navigationStyle": "custom",
   "navigationBarTitleText": "半夜的孤独月",
   "usingComponents": {
-    "bmusic": "/components/bmusic",
+    "bmusic": "/components/indexmusiccontrol",
     "mheader": "/components/header",
     "hot": "/components/hot",
     "recommend": "/components/recommend",

@@ -7,16 +7,20 @@
         "navigationBarTitleText": "半夜的孤独月"
         // "enablePullDownRefresh": true
       }
-    }, 
+    },
     {
       "path": "pages/comment/comment",
       "style": {
         "navigationBarTitleText": "评论"
       }
+    }, {
+      "path": "pages/miuscinfo/miuscinfo",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {
-    
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#F8F8F8",

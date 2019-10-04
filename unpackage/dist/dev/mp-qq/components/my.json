@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "alreadylist": "/components/mylist"
+  },
+  "component": true
+}

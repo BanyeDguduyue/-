@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import Bmusic from '../../components/bmusic.vue'
+  import Bmusic from '../../components/indexmusiccontrol.vue'
   import Mheader from '../../components/header.vue'
   import Hot from '../../components/hot.vue'
   import Recommend from '../../components/recommend.vue'
@@ -139,14 +139,16 @@
   }
 
   .bg {
-    filter: blur(22upx);
+    filter: blur(65px);
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: -3;
+    z-index: -1;
     transform: translateZ(0);
+    // background-color: #969696;
+    opacity: .6;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -172,7 +174,7 @@
     bottom: 0;
     right: 0;
     z-index: -1;
-    background-color: rgba(0, 0, 0, .4)
+    background-color: rgba(0, 0, 0, .6)
   }
 
   .content {
@@ -197,6 +199,9 @@
 
   .bottom {
     width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
   }
 
   .page-swich {

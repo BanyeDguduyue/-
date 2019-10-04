@@ -1,12 +1,10 @@
 <template>
   <view class="header">
-    <view class="left">
-      <view class="avatar-container">
-        <image :src="getavatar" class="avatar"></image>
-      </view>
+    <view class="logo-container">
+      
     </view>
     <view class="title">
-      {{name}}
+      
     </view>
   </view>
 </template>
@@ -15,23 +13,26 @@
   export default {
     data() {
       return {
-        animation: null,
-        animationData: {}
+
       };
     },
     computed: {
       getavatar() {
         return this.$store.state.curavatar
       },
-      name(){
+      name() {
         return this.$store.state.name
       }
     },
-    mounted() {}
+    mounted() {},
+    methods: {
+      
+    }
   }
 </script>
 
 <style lang="scss">
+  @import '@/static/64tupian/_var.scss';
   .header {
     color: white;
     text-align: center;
@@ -42,24 +43,14 @@
     padding: 8upx 0;
     box-sizing: border-box;
     align-items: center;
-    .left {
-      flex: 1;
-
-      .avatar-container {
-        margin: 0 auto;
-        width: 8vh;
-        height: 8vh;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 8upx solid rgb(138, 151, 123);
-        box-sizing: border-box;
-        animation: headRotate 6s linear infinite;
-        .avatar {
-          width: 100%;
-          height: 100%;
-        }
-      }
+    .logo-container{
+      width: 60upx;
+      height: 72upx;
+      background-image: url($logo);
+      background-size: cover;
+      margin-left: 60upx;
     }
+
 
     .title {
       flex: 2;
@@ -70,17 +61,17 @@
   }
 
   // 头像旋转
-  @keyframes headRotate {
-    0% {
-      transform: rotate(0deg);
-    }
+  // @keyframes headRotate {
+  //   0% {
+  //     transform: rotate(0deg);
+  //   }
 
-    50% {
-      transform: rotate(180deg);
-    }
+  //   50% {
+  //     transform: rotate(180deg);
+  //   }
 
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+  //   100% {
+  //     transform: rotate(360deg);
+  //   }
+  // }
 </style>

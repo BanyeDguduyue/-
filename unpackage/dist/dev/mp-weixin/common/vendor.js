@@ -733,7 +733,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -6978,7 +6978,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -6999,14 +6999,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7082,7 +7082,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8389,7 +8389,7 @@ main();
 /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, deprecated, description, devDependencies, files, gitHead, homepage, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23220190921001","_inBundle":false,"_integrity":"sha512-xlHjc5YqMrdr4rIKE/aMXlfzLDVxbCY31e/jH+n2NtFA14KDtNIHzsgNM0h0Mq8IUfDFtMMPmmlay59RTmHonQ==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23220190921001.tgz","_shasum":"63200bbfbdcc4c696ed0be335fa14613757c4026","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"d26b206188ff9e5de659870e5f4e8b2d24d8f02f","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23220190921001"};
+module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.0.0-23320190923002","_inBundle":false,"_integrity":"sha512-MnftsvgOac3q1FCOBPzivbFn8GNQFo7D2DY325HeEZyFCWgx5GEwHpGYjT1PQU6v7DaDn0ruxa3ObdpUIYbmZw==","_location":"/@dcloudio/uni-stat","_phantomChildren":{},"_requested":{"type":"tag","registry":true,"raw":"@dcloudio/uni-stat@next","name":"@dcloudio/uni-stat","escapedName":"@dcloudio%2funi-stat","scope":"@dcloudio","rawSpec":"next","saveSpec":null,"fetchSpec":"next"},"_requiredBy":["#USER","/","/@dcloudio/vue-cli-plugin-uni"],"_resolved":"https://registry.npmjs.org/@dcloudio/uni-stat/-/uni-stat-2.0.0-23320190923002.tgz","_shasum":"0c400c140ca0b3c05f52d25f11583cf05a0c4e9a","_spec":"@dcloudio/uni-stat@next","_where":"/Users/fxy/Documents/DCloud/HbuilderX-plugins/release/uniapp-cli","author":"","bugs":{"url":"https://github.com/dcloudio/uni-app/issues"},"bundleDependencies":false,"deprecated":false,"description":"","devDependencies":{"@babel/core":"^7.5.5","@babel/preset-env":"^7.5.5","eslint":"^6.1.0","rollup":"^1.19.3","rollup-plugin-babel":"^4.3.3","rollup-plugin-clear":"^2.0.7","rollup-plugin-commonjs":"^10.0.2","rollup-plugin-copy":"^3.1.0","rollup-plugin-eslint":"^7.0.0","rollup-plugin-json":"^4.0.0","rollup-plugin-node-resolve":"^5.2.0","rollup-plugin-replace":"^2.2.0","rollup-plugin-uglify":"^6.0.2"},"files":["dist","package.json","LICENSE"],"gitHead":"fed4c73fb9142a1b277dd79313939cad90693d3e","homepage":"https://github.com/dcloudio/uni-app#readme","license":"Apache-2.0","main":"dist/index.js","name":"@dcloudio/uni-stat","repository":{"type":"git","url":"git+https://github.com/dcloudio/uni-app.git","directory":"packages/uni-stat"},"scripts":{"build":"NODE_ENV=production rollup -c rollup.config.js","dev":"NODE_ENV=development rollup -w -c rollup.config.js"},"version":"2.0.0-23320190923002"};
 
 /***/ }),
 /* 7 */
@@ -8400,7 +8400,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "navigationBarTitleText": "半夜的孤独月" }, "pages/comment/comment": { "navigationBarTitleText": "评论" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationStyle": "custom", "navigationBarTitleText": "半夜的孤独月" }, "pages/comment/comment": { "navigationBarTitleText": "评论" }, "pages/miuscinfo/miuscinfo": { "navigationStyle": "custom" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -9532,8 +9532,16 @@ var index_esm = {
   // 初始的图片背景
   bgimgurl: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
   curavatar: 'http://n.sinaimg.cn/translate/19/w1024h595/20190920/f48b-iewtemz4172127.jpg',
+  // 歌曲名字
   name: 'Simple',
-  mysonglist: [] };exports.default = _default;
+  // 歌手名字
+  singer: "Jay",
+  // 已听过的歌曲列表
+  mysonglist: [],
+  // 歌曲歌词的信息
+  lyricObj: {
+    timeList: [],
+    lyricList: ['还没有歌词呢！'] } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -9561,7 +9569,6 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
 
     obj.src,id = obj.id;
     if (src) {
-
       // 停止播放歌曲
       state.innerAudioContext.stop();
       // 清空音频
@@ -9572,20 +9579,27 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
       state.nowsong = id;
       // 设定src
       state.innerAudioContext.src = src;
-
       // 判断歌单是否存在当前的歌
       if (!state.sonlists.find(function (item) {return item.id == obj.searchpush.id;})) {
         state.sonlists.unshift(obj.searchpush);
       }
+      // 我听过的歌单
       if (!state.mysonglist.find(function (item) {return item.id == obj.searchpush.id;})) {
         state.mysonglist.unshift(obj.searchpush);
       }
-
-
       // 获取筛选出当前歌曲的背景图
-      state.bgimgurl = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].picurl;
+      if (state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].picurl) {
+        state.bgimgurl = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].picurl;
+      } else {
+        state.bgimgurl = 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=18359934,941876167&fm=26&gp=0.jpg';
+      }
+
       // 更改歌曲名字
       state.name = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].name;
+      // 保存歌手名
+      state.singer = state.sonlists.filter(function (item) {return item.id == state.nowsong;})[0].singer;
+      // 获取歌词
+      _index.default.commit('getSonglistInfo');
       // 播放音乐
       _index.default.commit('playMusic');
     }
@@ -9604,14 +9618,12 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
     // 清空定时器
     clearInterval(state.timer);
     clearInterval(state.timer1);
-
     // 播放音乐
     state.innerAudioContext.play();
 
     state.innerAudioContext.onPlay(function () {
       // 等到歌曲播放时
       // 更换样式
-
       state.musicisplay = true;
     });
 
@@ -9652,21 +9664,70 @@ var _state = _interopRequireDefault(__webpack_require__(/*! ./state */ 17));func
       state.musicisplay = false;
     });
   },
+  getSonglistInfo: function getSonglistInfo(state) {
+    state.lyricObj.lyricList = [];
+    state.lyricObj.timeList = [];
+    uni.request({
+      url: 'http://39.107.80.8:5000/lyric?id=' + state.nowsong,
+      method: 'GET',
+      data: {},
+      success: function success(res) {
+        // 如果发送请求后没有歌词那么就返回此选项 并停止向下运行了
+        if (!res.data.lrc) {
+          state.lyricObj.lyricList = ['这首歌没有歌词，不好意思(lll￢ω￢)'];
+          return;
+        }
+        // 从换行符进行切割
+        var data = res.data.lrc.lyric.split('\n');
+        // 正则匹配,()可以单独取出
+        var timeReg = /\[(\d*:\d*\.\d*)\]/;
+
+        data.forEach(function (item, index) {
+          // 判断歌词是否为空 从]切割 第项如果不为空那么就往下执行
+          if (item.split(']')[1] !== '') {
+            // 防止有空项 有的歌词最后一项是空
+            if (item !== '') {
+              // 获取时间的字符串
+              var timeStr = timeReg.exec(item)[1];
+              // 从:处切割
+              var _res = timeStr.split(':');
+              // 计算分钟
+              var min = parseInt(_res[0]) * 60;
+              // 计算秒数
+              var sec = parseFloat(_res[1]);
+              // 计算总时间 
+              var time = Number(min + sec).toFixed(2);
+              // 将歌词推进数组
+              state.lyricObj.lyricList.push(item.split(']')[1]);
+              // 将时间也推进相对应的数组
+              state.lyricObj.timeList.push(time);
+            }
+          }
+        });
+      },
+      fail: function fail() {},
+      complete: function complete() {} });
+
+  },
   //单独计算小球的进度
   aloneballp: function aloneballp(state) {
     // 先清除再开启
     clearInterval(state.timer1);
     state.timer1 = setInterval(function () {
+      // 获取进度条走的时间
       state.currentTime1 = state.innerAudioContext.currentTime;
+      // 获取整体时间
       state.duration1 = state.innerAudioContext.duration;
     }, 1000);
   },
   // 停止小球的计算
   stopballp: function stopballp(state) {
+    // 关闭定时器
     clearInterval(state.timer1);
   },
   // 歌曲时间跳转
   jumpToTarget: function jumpToTarget(state, time) {
+    // 调用seek方法跳转时间
     state.innerAudioContext.seek(time);
   },
   getlooptype: function getlooptype(state, type) {

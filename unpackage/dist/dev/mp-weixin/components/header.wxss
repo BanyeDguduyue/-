@@ -42,27 +42,12 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.header .left {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-}
-.header .left .avatar-container {
-      margin: 0 auto;
-      width: 8vh;
-      height: 8vh;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 8rpx solid #8a977b;
-      -webkit-box-sizing: border-box;
-              box-sizing: border-box;
-      -webkit-animation: headRotate 6s linear infinite;
-              animation: headRotate 6s linear infinite;
-}
-.header .left .avatar-container .avatar {
-        width: 100%;
-        height: 100%;
+.header .logo-container {
+    width: 60rpx;
+    height: 72rpx;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAkCAYAAACe0YppAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFEmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0xMC0wNFQxNToxNDo0MCswODowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMTAtMDRUMTU6MTk6MjUrMDg6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMTAtMDRUMTU6MTk6MjUrMDg6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0ic1JHQiBJRUM2MTk2Ni0yLjEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTY0MDIwNWMtZTU3NC0xZjRkLWIzNTUtYWI0ZjNhZDQ1OTRhIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjk2NDAyMDVjLWU1NzQtMWY0ZC1iMzU1LWFiNGYzYWQ0NTk0YSIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk2NDAyMDVjLWU1NzQtMWY0ZC1iMzU1LWFiNGYzYWQ0NTk0YSI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTY0MDIwNWMtZTU3NC0xZjRkLWIzNTUtYWI0ZjNhZDQ1OTRhIiBzdEV2dDp3aGVuPSIyMDE5LTEwLTA0VDE1OjE0OjQwKzA4OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmsbedUAAAPLSURBVFiFvZdPaNxVEMc/E5ZlCUFD0NjmUCQElSIqUkuoUjRW9KRezMGDeBDxoNKKFARFPNWLtAfBg4oolOJJD94iUlu0/qloa0HQGmPQsK1tDCFNY0zy9fDmZ2dff7/NLjYOPPbtvJn5zryZN+/9ICNJuyX9IOkpST35ehVJelfShKTHu9ErlHslndElGutQbzTonOgK1A3sDQa+7kLvs6A33omOBeU+4FdgwFmLwBTwGzDta9M+TprZrOvtAiaCzS+ASdf9xeV/NLOpKq9fVOf0dNA72qHORUknJL0vaZe58lXuXRHtAaAODAPXA0NAH1AUzX1m9rGkUeCY82aAT4DbgZuCbBk9U/PJswH0sJntqdiVhjswWxgIy/vM7PUgdwMw4o5vBq5x3QZwBEl9ks77dqxK2ubKj0q6ucplSf2S/nK9Mw5WrA0rVXqjSh9Jz4c8HHTeFndCkn5XOqN9md6TQW9vtvam8/+W9I2kfZJGcuAH3OMLkoacd5ekP4PhP0oc3irpHUnflzj1ZUlxPRxliuKqA1vN7LugXAfGgO3AjJm9VbltlztV6N4LbAM2AXeY2UKnNgpDlbneMJI05vk+Kmn7/wn8bcjTqqQ3/NyXyZbyy8jWE5D0BPAaEI3eaWafZ3I14CKwBjSBs/47DfwEnPYxaWbLHXnnx+ttpbZ3qEJmsKSSy2hV0o51I86MDwArZjZfslYHdgO3AreQ2mYtl3O6vyvgLp2skVrmCKl9PgKM+vJDUfCQpGOSHtsgR14J2z1ec2YPME66UY4D77UxMAw8CMz7mCNdGueAZpvCibdVvchBf1hoaX8BsNfMFoHbgP1tHJsjVfLLZvZhFXDxJx6VlrMob/jAz85aJkVaRf2k4hrK+KUR1wOzNGI3iJl9BFwtaROpaLYAg8C1wA5gp8uvtHGuFLg3E1ry34akne75GulNdtLMjhSCkp4LwHmuY8S1Ajiet/zyXgzzT7O1V4EXwv/rwjy/iVqAe0qYecQXqKY8LQNhntdByxusiHQt8PKIo4E9pOcupIhOZbKxMOfaAPeUAcd85wa+yi+HjOJuNTsBjoWQ99fZMP9AUtN5s+7UkusvkfozpEBm2ji4UoDEQsgjPhvmgz7Wo9Nmlh+nGPG/wDGPOfBx4B7S2+tGUmMYINVCcbTWSFEvknZhgsspAi/VAMxsXtKyg7ZUn3t+2Md/oWh3IeazSepC3X3btiHvbgdJRRff1eci8OSVBialo+wbeyYCnwLuvoKgmNmUpJdI304NUv9eIL29LpHS91DeuTaE/gGZruNCZ81KzgAAAABJRU5ErkJggg==");
+    background-size: cover;
+    margin-left: 60rpx;
 }
 .header .title {
     -webkit-box-flex: 2;
@@ -73,33 +58,5 @@
     -o-text-overflow: ellipsis;
        text-overflow: ellipsis;
     overflow: hidden;
-}
-@-webkit-keyframes headRotate {
-0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-}
-50% {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-}
-100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-}
-}
-@keyframes headRotate {
-0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-}
-50% {
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
-}
-100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-}
 }
 

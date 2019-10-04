@@ -9,7 +9,7 @@
       </view>
     </view>
     <scroll-view  scroll-y="true" class="scroll-Y songs-list">
-      <view class="song-item" v-for="(item,idx) in hotsong" :key='idx'>
+      <view class="song-item" :class="{highlight:item.name == getName}" v-for="(item,idx) in hotsong" :key='idx'>
         <view class="song-num">
           {{idx+1}}
         </view>
@@ -17,10 +17,10 @@
           {{item.name}}
         </view>
         <template v-if="!isplay(item.id)">
-          <view class="song play" :data-id='item.id' @tap="playsong(item.id)"></view>
+          <view class="song play"  @tap="playsong(item.id)"></view>
         </template>
         <template v-else>
-          <view class="song pause" :data-id='item.id' @tap="playsong(item.id)"></view>
+          <view class="song pause"  @tap="playsong(item.id)"></view>
         </template>
         <view class="singer">
           {{item.singer}}
@@ -51,7 +51,12 @@
         return function(id){
           return (id == this.$store.state.nowsong) && this.$store.state.musicisplay
         }
-      }
+      },
+      getName(){
+        let songname = this.$store.state.name
+        return songname
+      },
+      
     },
     methods: {
       playsong(id) {
@@ -112,15 +117,14 @@
     }
 
     .songs-list {
-      color: hsla(0, 0%, 100%, .6);
       height: 63vh;
-
       .song-item {
         height: 6.1vh;
         display: flex;
         line-height: 100upx;
         border-bottom: 1rpx solid rgba(255,255,255,.1);
         align-items: center;
+        color: hsla(0, 0%, 100%, .6);
         .song-num {
           flex: 1.1;
           text-align: center;
@@ -134,14 +138,15 @@
         }
 
         .song {
-          width: 70upx;
-          height: 70upx;
+          width: 60upx;
+          height: 60upx;
           background-size: cover;
           background-repeat: no-repeat;
           display: flex;
           justify-content: center;
           align-self: center;
           margin-right: 10upx;
+          background-image: url($defaultplay);
         }
 
         .play {
@@ -158,6 +163,9 @@
           text-overflow: ellipsis;
           overflow: hidden;
         }
+      }
+      .highlight{
+        color: #FFFFFF;
       }
     }
   }

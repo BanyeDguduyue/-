@@ -131,8 +131,8 @@
         }
 
         .song {
-          width: 70upx;
-          height: 70upx;
+          width: 60upx;
+          height: 60upx;
           background-size: cover;
           background-repeat: no-repeat;
           display: flex;
