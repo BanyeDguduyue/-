@@ -30,7 +30,7 @@
       </view>
     </view>
     <view class="flex-item bottom">
-      <Bmusic :songList='songList'></Bmusic>
+      <Bmusic></Bmusic>
     </view>
   </view>
 </template>
