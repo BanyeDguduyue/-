@@ -78,7 +78,7 @@
           // console.log(this.$store.getters.ballprogress * 100);
           this.silderdisabled = false
         }
-        return 'aaa'
+        return this.balllocat 
       },
       getduration(){
         const duration = this.$store.state.duration
@@ -271,7 +271,7 @@
           top: -250upx;
           width: 70upx;
           height: 250upx;
-          background-color: rgba(0, 0, 0, .4);
+          background-color: rgba(0, 0, 0, .1);
           display: flex;
           justify-content: space-between;
           flex-direction: column;

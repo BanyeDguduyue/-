@@ -11,7 +11,7 @@
       </view>
     </view>
     <scroll-view scroll-y="true" class="scroll-Y songs-list">
-      <view class="song-item" v-for="(item,idx) in ssongList" :key='idx'>
+      <view class="song-item" v-for="(item,idx) in ssongList" :class="{highlight:item.name == getName}" :key='idx'>
         <view class="song-num">
           {{idx+1}}
         </view>
@@ -46,6 +46,10 @@
         return function(id) {
           return (id == this.$store.state.nowsong) && this.$store.state.musicisplay
         }
+      },
+      getName(){
+        let songname = this.$store.state.name
+        return songname
       }
     },
     components: {
@@ -167,8 +171,8 @@
         }
 
         .song {
-          width: 70upx;
-          height: 70upx;
+          width: 60upx;
+          height: 60upx;
           background-size: cover;
           background-repeat: no-repeat;
           display: flex;
@@ -191,6 +195,9 @@
           text-overflow: ellipsis;
           overflow: hidden
         }
+      }
+      .highlight{
+        color: #FFFFFF;
       }
     }
   }

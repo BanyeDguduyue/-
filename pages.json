@@ -16,6 +16,7 @@
     }, {
       "path": "pages/miuscinfo/miuscinfo",
       "style": {
+        "navigationBarTitleText": "歌曲详情页",
         "navigationStyle": "custom"
       }
     }

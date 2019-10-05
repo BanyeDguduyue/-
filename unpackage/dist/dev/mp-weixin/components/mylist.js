@@ -151,21 +151,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   props: ['sendsonglist'],
   data: function data() {
     return {
-      backval: false };
+      backval: false,
+      nowsong: '',
+      musicisplay: '' };
 
   },
   computed: {
     isplay: function isplay() {
       return function (id) {
+        this.nowsong = this.$store.state.nowsong;
+        this.musicisplay = this.$store.state.musicisplay;
         return id == this.$store.state.nowsong && this.$store.state.musicisplay;
       };
+    },
+    getName: function getName() {
+      var songname = this.$store.state.name;
+      return songname;
     } },
 
   methods: {

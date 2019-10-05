@@ -16,12 +16,12 @@
         <view class="song-name">
           {{item.name}}
         </view>
-        <template v-if="!isplay(item.id)">
-          <view class="song play"  @tap="playsong(item.id)"></view>
-        </template>
-        <template v-else>
-          <view class="song pause"  @tap="playsong(item.id)"></view>
-        </template>
+        <!-- 获取相关信息 -->
+        <view v-if="!isplay(item.id)">
+          
+        </view>
+        <view class="song"  @tap="playsong(item.id)" :class="(item.id == nowsong) && musicisplay ? 'pause' : (item.id == nowsong)?'play' : '' "></view>
+
         <view class="singer">
           {{item.singer}}
         </view>
@@ -40,6 +40,8 @@
           scrollTop: 0
         },
         url: '',
+        nowsong: '',
+        musicisplay: false
       };
     },
     mounted() {
@@ -49,14 +51,16 @@
       // 是否播放状态切换
       isplay(){
         return function(id){
+          this.nowsong = this.$store.state.nowsong
+          this.musicisplay = this.$store.state.musicisplay
+          
           return (id == this.$store.state.nowsong) && this.$store.state.musicisplay
         }
       },
       getName(){
         let songname = this.$store.state.name
         return songname
-      },
-      
+      }
     },
     methods: {
       playsong(id) {
@@ -107,7 +111,6 @@
       display: flex;
       justify-content: space-between;
       height: 7vh;
-      border-bottom: 1rpx solid #ccc;
 
       .item {
         text-align: center;

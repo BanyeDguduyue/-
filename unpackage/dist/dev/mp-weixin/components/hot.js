@@ -162,7 +162,9 @@ var _default =
       old: {
         scrollTop: 0 },
 
-      url: '' };
+      url: '',
+      nowsong: '',
+      musicisplay: false };
 
   },
   mounted: function mounted() {
@@ -172,6 +174,9 @@ var _default =
     // 是否播放状态切换
     isplay: function isplay() {
       return function (id) {
+        this.nowsong = this.$store.state.nowsong;
+        this.musicisplay = this.$store.state.musicisplay;
+
         return id == this.$store.state.nowsong && this.$store.state.musicisplay;
       };
     },
@@ -179,7 +184,6 @@ var _default =
       var songname = this.$store.state.name;
       return songname;
     } },
-
 
   methods: {
     playsong: function playsong(id) {var _this = this;

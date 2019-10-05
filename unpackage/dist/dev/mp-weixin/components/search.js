@@ -169,6 +169,10 @@ __webpack_require__.r(__webpack_exports__);
       return function (id) {
         return id == this.$store.state.nowsong && this.$store.state.musicisplay;
       };
+    },
+    getName: function getName() {
+      var songname = this.$store.state.name;
+      return songname;
     } },
 
   components: {

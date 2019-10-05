@@ -9,19 +9,17 @@
 	    </view>
 	  </view>
 	  <scroll-view  scroll-y="true" class="scroll-Y songs-list">
-	    <view class="song-item" v-for="(item,idx) in sendsonglist" :key='idx'>
+	    <view class="song-item" v-for="(item,idx) in sendsonglist" :class="{highlight:item.name == getName}" :key='idx'>
 	      <view class="song-num">
 	        {{idx+1}}
 	      </view>
 	      <view class="song-name">
 	        {{item.name}}
 	      </view>
-	      <template v-if="!isplay(item.id)">
-	        <view class="song play"  @tap="playsong(item.id)"></view>
-	      </template>
-	      <template v-else>
-	        <view class="song pause"  @tap="playsong(item.id)"></view>
-	      </template>
+	      <view v-if="!isplay(item.id)">
+	        
+	      </view>
+	      <view class="song"  @tap="playsong(item.id)" :class="(item.id == nowsong) && musicisplay ? 'pause' : (item.id == nowsong)?'play' : '' "></view>
 	      <view class="singer">
 	        {{item.singer}}
 	      </view>
@@ -35,14 +33,22 @@
     props:['sendsonglist'],
 		data() {
 			return {
-				backval: false
+				backval: false,
+        nowsong: '',
+        musicisplay:''
 			};
 		},
     computed:{
       isplay(){
         return function(id){
+          this.nowsong = this.$store.state.nowsong
+          this.musicisplay = this.$store.state.musicisplay
           return (id == this.$store.state.nowsong) && this.$store.state.musicisplay
         }
+      },
+      getName(){
+        let songname = this.$store.state.name
+        return songname
       }
     },
     methods:{
@@ -99,8 +105,6 @@
       display: flex;
       justify-content: space-between;
       height: 7vh;
-      border-bottom: 1rpx solid #ccc;
-
       .item {
         text-align: center;
         width: 50%;
@@ -139,6 +143,7 @@
           justify-content: center;
           align-self: center;
           margin-right: 10upx;
+          background-image: url($defaultplay);
         }
 
         .play {
@@ -155,6 +160,9 @@
           text-overflow: ellipsis;
           overflow: hidden;
         }
+      }
+      .highlight{
+        color: #FFFFFF;
       }
     }
   }

@@ -185,7 +185,7 @@ var _default =
         // console.log(this.$store.getters.ballprogress * 100);
         this.silderdisabled = false;
       }
-      return 'aaa';
+      return this.balllocat;
     },
     getduration: function getduration() {
       var duration = this.$store.state.duration;

@@ -172,7 +172,9 @@ __webpack_require__.r(__webpack_exports__);
       scrollHeight: 40,
       // 控制歌词显示的距离
       padding: 60,
+      // 背景图
       bgimgurl: "url(".concat(this.$store.state.bgimgurl, ")"),
+      // 图片的链接
       imgurl: this.$store.state.bgimgurl };
 
   },
@@ -211,12 +213,15 @@ __webpack_require__.r(__webpack_exports__);
     lyriclong: function lyriclong() {
       // 点击歌词变成唱歌词模式
       if (this.isChangelyricLong) {
+        // 全屏歌词
         return 'lyric-scroll2';
       } else {
+        // 图片下方的歌词 原样
         return '';
       }
     },
     getsongworlist: function getsongworlist() {
+      // 获取歌词
       return this.$store.state.lyricObj.lyricList;
     } },
 
