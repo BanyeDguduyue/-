@@ -86,7 +86,7 @@
         top: -250rpx;
         width: 70rpx;
         height: 250rpx;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.1);
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;

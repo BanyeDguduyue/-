@@ -74,11 +74,7 @@
       percent() {
         // 相当于定时器给小球的位置不断计算
         this.balllocat = this.$store.getters.ballprogress * 100
-        if(this.$store.getters.ballprogress * 100 > 0){
-          // console.log(this.$store.getters.ballprogress * 100);
-          this.silderdisabled = false
-        }
-        return this.balllocat 
+        return this.$store.getters.ballprogress * 100
       },
       getduration(){
         const duration = this.$store.state.duration
@@ -105,8 +101,11 @@
         return `${min}:${sec}`
       }
     },
-    mounted() {
-
+    mounted(){
+      // 进入歌曲详情页就可以滑动slider
+      if(this.$store.state.innerAudioContext.src){
+        this.silderdisabled = false
+      }
     },
     methods: {
       // 获取评论
@@ -114,10 +113,7 @@
         if(!this.$store.state.nowsong) return
         const songid = this.$store.state.nowsong
         uni.navigateTo({
-          url: '../comment/comment?songid=' + songid,
-          success: res => {},
-          fail: () => {},
-          complete: () => {}
+          url: '../comment/comment?songid=' + songid
         });
       },
       sliderChange(e) {

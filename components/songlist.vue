@@ -50,6 +50,7 @@
         }
       },
       getName(){
+        // 获取歌名
         let songname = this.$store.state.name
         return songname
       }

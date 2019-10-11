@@ -1,0 +1,23 @@
+{
+  "name": "easyMusicPlay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BanyeDguduyue/easyMusicPlay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BanyeDguduyue/easyMusicPlay/issues"
+  },
+  "homepage": "https://github.com/BanyeDguduyue/easyMusicPlay#readme",
+  "dependencies": {
+    "vue-lazyload": "^1.3.3"
+  }
+}

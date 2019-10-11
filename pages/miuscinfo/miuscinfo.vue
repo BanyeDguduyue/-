@@ -24,7 +24,9 @@
         </view>
       </view>
     </scroll-view>
-
+    <view class="gotomv" @tap="gotomv">
+      MV
+    </view>
     <view class="music-control">
       <Bmusic></Bmusic>
     </view>
@@ -34,6 +36,19 @@
 <script>
   import Bmusic from '@/components/bmusic.vue'
   export default {
+    onLoad(){
+      uni.request({
+        url: `http://39.107.80.8:5000/search?keywords=${this.$store.state.name}&type=1004`,
+        method: 'GET',
+        data: {},
+        success: res => {
+          const id = res.data.result.mvs[0].id
+          this.$store.commit('getmvid',id)
+        },
+        fail: () => {},
+        complete: () => {}
+      });
+    },
     data() {
       return {
         // 存储歌词以及时间 长度相同
@@ -57,9 +72,6 @@
     components: {
       Bmusic
     },
-    onLoad(){
-      
-    },
     computed: {
       // 获取背景图
       getimgbg() {
@@ -79,6 +91,8 @@
         // 获取第几条歌词需要高亮
         // 当当前的播放时间大于某一项时就把下标赋值给 index （让某项的歌词高亮）
         this.$store.state.lyricObj.timeList.forEach((item,idx)=> {
+          // 每次都会循环一次 当当前的进度时间到达 歌词的时间就会重新更改index
+          // 让第几条歌词高亮 和滚动多少距离
           if(this.$store.state.currentTime1 > item){
             this.index = idx
           }
@@ -106,6 +120,15 @@
       goBack(){
         uni.navigateBack({
             delta: 2
+        });
+      },
+      // 进入mv播放页面
+      gotomv(){
+        this.$store.commit('pauseMusic')
+        uni.navigateTo({
+          url: '../mvinfo/mvinfo',
+          // animationType: 'zoom-out',
+          animationDuration: 200
         });
       },
       // toggle改变滚动条
@@ -145,6 +168,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    .gotomv{
+      color: white;
+    }
     .currimg {
       width: 0;
       height: 0;
@@ -246,5 +272,13 @@
       z-index: -1;
       background-color: rgba(0, 0, 0, .6)
     }
+    .menu{
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      height: 10vh;
+      align-items: center;
+      color: #FFFFFF;
+      }
   }
 </style>

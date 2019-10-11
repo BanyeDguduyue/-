@@ -33,5 +33,7 @@ export default {
   lyricObj:{
     timeList:[],
     lyricList:['还没有歌词呢！']
-  }
+  },
+  // 获取mvid
+  mvid: ''
 }

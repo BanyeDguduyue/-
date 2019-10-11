@@ -20,7 +20,13 @@
         "navigationStyle": "custom"
       }
     }
-  ],
+        ,{
+            "path" : "pages/mvinfo/mvinfo",
+            "style" : {
+              "navigationStyle": "custom"
+            }
+        }
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",

@@ -1,1 +1,1 @@
-<view class="header"><view class="title">{{''+name+''}}</view></view>
+<view class="header"><view class="logo-container"></view><view class="title"></view></view>

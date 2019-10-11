@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/comment/comment",
-    "pages/miuscinfo/miuscinfo"
+    "pages/miuscinfo/miuscinfo",
+    "pages/mvinfo/mvinfo"
   ],
   "window": {
     "navigationBarTextStyle": "black",

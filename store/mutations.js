@@ -225,5 +225,8 @@ export default {
   },
   changeAvatar(state,url){
     state.curavatar = url
+  },
+  getmvid(state,id){
+    state.mvid = id
   }
 }

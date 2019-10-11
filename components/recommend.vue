@@ -10,7 +10,7 @@
         </view>
         <view class="list">
           <view class="item" v-for="(item,idx) in songrankinglist" :key='idx' @tap="sendlist1(item.id)">
-            <image lazy-load="true" class="type-img" :src="item.imgurl" mode=""></image>
+            <image :lazy-load="true" class="type-img" :src="item.imgurl" mode=""></image>
             <view class="description">
               {{item.name}}
             </view>
@@ -165,6 +165,7 @@
 </script>
 
 <style lang="scss">
+  
   .recommend {
     width: 100%;
     height: 100%;

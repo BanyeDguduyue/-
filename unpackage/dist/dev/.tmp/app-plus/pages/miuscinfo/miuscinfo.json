@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "歌曲详情页",
   "navigationStyle": "custom",
   "usingComponents": {
     "bmusic": "/components/bmusic"

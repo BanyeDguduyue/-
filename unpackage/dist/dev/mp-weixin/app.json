@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/comment/comment",
-    "pages/miuscinfo/miuscinfo"
+    "pages/miuscinfo/miuscinfo",
+    "pages/mvinfo/mvinfo"
   ],
   "subPackages": [],
   "window": {
@@ -12,5 +13,5 @@
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap93.json"
+  "sitemapLocation": "sitemap92.json"
 }
